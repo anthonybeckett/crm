@@ -1,25 +1,29 @@
 <template>
-    <section>
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                Profile Information
-            </h2>
+	<section>
+		<header>
+			<h2 class="text-lg font-medium text-gray-900">
+				Profile Information
+			</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
-                Update your account's profile information and email address.
-            </p>
-        </header>
+			<p class="mt-1 text-sm text-gray-600">
+				Update your account's profile information and email address.
+			</p>
+		</header>
 
 		<v-form class="mt-4">
-			<div>
-				<p v-if="form.errors.name" class="text-red-500">{{ form.errors.name }}</p>
-				<v-text-field v-model="form.name" label="Name" variant="outlined"></v-text-field>
-			</div>
+			<v-text-field
+				v-model="form.name"
+				label="Name"
+				variant="outlined"
+				:error-messages="form.errors.name"
+			></v-text-field>
 
-			<div>
-				<p v-if="form.errors.email" class="text-red-500">{{ form.errors.email }}</p>
-				<v-text-field v-model="form.email" label="Email" variant="outlined"></v-text-field>
-			</div>
+			<v-text-field
+				v-model="form.email"
+				label="Email"
+				variant="outlined"
+				:error-messages="form.errors.email"
+			></v-text-field>
 
 			<div v-if="mustVerifyEmail && user.email_verified_at === null">
 				<p class="mt-2 text-sm text-gray-800">
@@ -44,7 +48,7 @@
 
 			<v-btn variant="outlined" :disabled="form.processing" @click="formSubmit">Save</v-btn>
 		</v-form>
-    </section>
+	</section>
 </template>
 
 <script setup>

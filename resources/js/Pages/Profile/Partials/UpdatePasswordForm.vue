@@ -1,35 +1,44 @@
 <template>
-    <section class="mt-4">
-        <header>
-            <h2 class="text-lg font-medium text-gray-900">
-                Update Password
-            </h2>
+	<section class="mt-4">
+		<header>
+			<h2 class="text-lg font-medium text-gray-900">
+				Update Password
+			</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
-                Ensure your account is using a long, random password to stay
-                secure.
-            </p>
-        </header>
+			<p class="mt-1 text-sm text-gray-600">
+				Ensure your account is using a long, random password to stay
+				secure.
+			</p>
+		</header>
 
 		<v-form class="mt-4">
-			<div>
-				<p v-if="form.errors.current_password" class="text-red-500">{{ form.errors.current_password }}</p>
-				<v-text-field v-model="form.current_password" label="Password" variant="outlined" type="password"></v-text-field>
-			</div>
+			<v-text-field
+				v-model="form.current_password"
+				label="Password"
+				variant="outlined"
+				type="password"
+				:error-messages="form.errors.current_password"
+			></v-text-field>
 
-			<div>
-				<p v-if="form.errors.password" class="text-red-500">{{ form.errors.password }}</p>
-				<v-text-field v-model="form.password" label="Password" variant="outlined" type="password"></v-text-field>
-			</div>
+			<v-text-field
+				v-model="form.password"
+				label="Password"
+				variant="outlined"
+				type="password"
+				:error-messages="form.errors.password"
+			></v-text-field>
 
-			<div>
-				<p v-if="form.errors.password_confirmation" class="text-red-500">{{ form.errors.password_confirmation }}</p>
-				<v-text-field v-model="form.password_confirmation" label="Confirm Password" variant="outlined" type="password"></v-text-field>
-			</div>
+			<v-text-field
+				v-model="form.password_confirmation"
+				label="Confirm Password"
+				variant="outlined"
+				type="password"
+				:error-messages="form.errors.password_confirmation"
+			></v-text-field>
 
 			<v-btn variant="outlined" :disabled="form.processing" @click="updatePassword">Save</v-btn>
 		</v-form>
-    </section>
+	</section>
 </template>
 
 <script setup>
