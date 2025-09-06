@@ -161,11 +161,11 @@
 </template>
 
 <script setup>
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import NavLink from "@/Components/NavLink.vue";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
-import Dropdown from "@/Components/Dropdown.vue";
+import ApplicationLogo from "@/Components/Generic/ApplicationLogo.vue";
+import NavLink from "@/Components/Generic/Nav/NavLink.vue";
+import ResponsiveNavLink from "@/Components/Generic/Nav/ResponsiveNavLink.vue";
+import DropdownLink from "@/Components/Generic/Nav/DropdownLink.vue";
+import Dropdown from "@/Components/Generic/Nav/Dropdown.vue";
 import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 
