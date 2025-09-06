@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 Route::middleware('auth')->group(function () {
     // Main
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
