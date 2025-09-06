@@ -29,34 +29,34 @@
 			</template>
 
 			<v-list>
-				<v-list-item :to="route('profile.edit')" link>
-					<v-list-item-title>
-						<v-icon class="mr-2">mdi-account</v-icon>
-						Profile
-					</v-list-item-title>
-				</v-list-item>
+				<Link :href="route('profile.edit')" class="flex items-center">
+					<v-list-item>
+						<v-list-item-title>
+							<v-icon class="mr-2">mdi-account</v-icon>
+							Profile
+						</v-list-item-title>
+					</v-list-item>
+				</Link>
 
-				<v-list-item
-					:href="route('logout')"
-					method="post"
-					as="button"
-				>
-					<v-list-item-title>
-						<v-icon class="mr-2">mdi-logout</v-icon>
-						Log Out
-					</v-list-item-title>
-				</v-list-item>
+				<Link :href="route('logout')" method="post" class="flex items-center">
+					<v-list-item>
+						<v-list-item-title>
+							<v-icon class="mr-2">mdi-logout</v-icon>
+							Log Out
+						</v-list-item-title>
+					</v-list-item>
+				</Link>
 			</v-list>
 		</v-menu>
 
 		<!-- Mobile Hamburger -->
-<!--		<v-btn-->
-<!--			class="sm:hidden"-->
-<!--			icon-->
-<!--			@click="drawer = !drawer"-->
-<!--		>-->
-<!--			<v-icon>mdi-menu</v-icon>-->
-<!--		</v-btn>-->
+		<!--		<v-btn-->
+		<!--			class="sm:hidden"-->
+		<!--			icon-->
+		<!--			@click="drawer = !drawer"-->
+		<!--		>-->
+		<!--			<v-icon>mdi-menu</v-icon>-->
+		<!--		</v-btn>-->
 	</v-app-bar>
 
 	<!-- Mobile Navigation Drawer -->
@@ -74,22 +74,23 @@
 		<v-divider/>
 
 		<v-list>
-			<v-list-item>
-				<v-list-item-title>{{ $page.props.auth.user.name }}</v-list-item-title>
-				<v-list-subtitle>{{ $page.props.auth.user.email }}</v-list-subtitle>
-			</v-list-item>
+			<Link :href="route('profile.edit')" class="flex items-center">
+				<v-list-item>
+					<v-list-item-title>
+						<v-icon class="mr-2">mdi-account</v-icon>
+						Profile
+					</v-list-item-title>
+				</v-list-item>
+			</Link>
 
-			<v-list-item :to="route('profile.edit')" link>
-				<v-list-item-title>Profile</v-list-item-title>
-			</v-list-item>
-
-			<v-list-item
-				:href="route('logout')"
-				method="post"
-				as="button"
-			>
-				<v-list-item-title>Log Out</v-list-item-title>
-			</v-list-item>
+			<Link :href="route('logout')" method="post" class="flex items-center">
+				<v-list-item>
+					<v-list-item-title>
+						<v-icon class="mr-2">mdi-logout</v-icon>
+						Log Out
+					</v-list-item-title>
+				</v-list-item>
+			</Link>
 		</v-list>
 	</v-navigation-drawer>
 </template>
