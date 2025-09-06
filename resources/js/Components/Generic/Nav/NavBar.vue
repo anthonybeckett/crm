@@ -1,173 +1,103 @@
 <template>
-	<nav class="border-b border-gray-100 bg-white">
-		<!-- Primary Navigation Menu -->
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-			<div class="flex h-16 justify-between">
-				<div class="flex">
-					<!-- Logo -->
-					<div class="flex shrink-0 items-center">
-						<Link :href="route('home')">
-							<ApplicationLogo
-								class="block h-9 w-auto fill-current text-gray-800 mr-8"
-							/>
-						</Link>
-					</div>
+	<!-- Top App Bar -->
+	<v-app-bar color="white" elevation="1">
+		<!-- Logo -->
+		<Link :href="route('home')" class="flex items-center">
+			<ApplicationLogo class="h-9 w-auto mr-4"/>
+		</Link>
 
-					<!-- Navigation Links -->
-					<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-						<NavLink :href="route('home')" :active="route().current('home')">
-							<v-icon class="mr-2">mdi-home</v-icon>
-							Home
-						</NavLink>
-					</div>
-				</div>
+		<!-- Desktop Navigation -->
+		<v-toolbar-items class="hidden sm:flex">
+			<Link :href="route('home')" class="flex items-center px-4">
+				<v-icon class="mr-2">mdi-home</v-icon>
+				Home
+			</Link>
+		</v-toolbar-items>
 
-				<div class="hidden sm:ms-6 sm:flex sm:items-center">
-					<!-- Settings Dropdown -->
-					<div class="relative ms-3">
-						<Dropdown align="right" width="48">
-							<template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-												type="button"
-												class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-											>
-                                                {{ $page.props.auth.user.name }}
+		<v-spacer/>
 
-                                                <svg
-													class="-me-0.5 ms-2 h-4 w-4"
-													xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-                                                    <path
-														fill-rule="evenodd"
-														d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-														clip-rule="evenodd"
-													/>
-                                                </svg>
-                                            </button>
-                                        </span>
-							</template>
-
-							<template #content>
-								<DropdownLink
-									:href="route('profile.edit')"
-								>
-									Profile
-								</DropdownLink>
-								<DropdownLink
-									:href="route('logout')"
-									method="post"
-									as="button"
-								>
-									Log Out
-								</DropdownLink>
-							</template>
-						</Dropdown>
-					</div>
-				</div>
-
-				<!-- Hamburger -->
-				<div class="-me-2 flex items-center sm:hidden">
-					<button
-						@click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
-						class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
-					>
-						<svg
-							class="h-6 w-6"
-							stroke="currentColor"
-							fill="none"
-							viewBox="0 0 24 24"
-						>
-							<path
-								:class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M4 6h16M4 12h16M4 18h16"
-							/>
-							<path
-								:class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M6 18L18 6M6 6l12 12"
-							/>
-						</svg>
-					</button>
-				</div>
-			</div>
-		</div>
-
-		<!-- Responsive Navigation Menu -->
-		<div
-			:class="{
-                        block: showingNavigationDropdown,
-                        hidden: !showingNavigationDropdown,
-                    }"
-			class="sm:hidden"
-		>
-			<div class="space-y-1 pb-3 pt-2">
-				<ResponsiveNavLink
-					:href="route('home')"
-					:active="route().current('home')"
+		<!-- User Menu -->
+		<v-menu>
+			<template #activator="{ props }">
+				<v-btn
+					v-bind="props"
+					variant="text"
+					append-icon="mdi-menu-down"
 				>
-					Home
-				</ResponsiveNavLink>
-			</div>
+					{{ $page.props.auth.user.name }}
+				</v-btn>
+			</template>
 
-			<!-- Responsive Settings Options -->
-			<div
-				class="border-t border-gray-200 pb-1 pt-4"
-			>
-				<div class="px-4">
-					<div
-						class="text-base font-medium text-gray-800"
-					>
-						{{ $page.props.auth.user.name }}
-					</div>
-					<div class="text-sm font-medium text-gray-500">
-						{{ $page.props.auth.user.email }}
-					</div>
-				</div>
-
-				<div class="mt-3 space-y-1">
-					<ResponsiveNavLink :href="route('profile.edit')">
+			<v-list>
+				<v-list-item :to="route('profile.edit')" link>
+					<v-list-item-title>
+						<v-icon class="mr-2">mdi-account</v-icon>
 						Profile
-					</ResponsiveNavLink>
-					<ResponsiveNavLink
-						:href="route('logout')"
-						method="post"
-						as="button"
-					>
+					</v-list-item-title>
+				</v-list-item>
+
+				<v-list-item
+					:href="route('logout')"
+					method="post"
+					as="button"
+				>
+					<v-list-item-title>
+						<v-icon class="mr-2">mdi-logout</v-icon>
 						Log Out
-					</ResponsiveNavLink>
-				</div>
-			</div>
-		</div>
-	</nav>
+					</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-menu>
+
+		<!-- Mobile Hamburger -->
+<!--		<v-btn-->
+<!--			class="sm:hidden"-->
+<!--			icon-->
+<!--			@click="drawer = !drawer"-->
+<!--		>-->
+<!--			<v-icon>mdi-menu</v-icon>-->
+<!--		</v-btn>-->
+	</v-app-bar>
+
+	<!-- Mobile Navigation Drawer -->
+	<v-navigation-drawer
+		v-model="drawer"
+		temporary
+		location="left"
+	>
+		<v-list>
+			<v-list-item :to="route('home')" link>
+				<v-list-item-title>Home</v-list-item-title>
+			</v-list-item>
+		</v-list>
+
+		<v-divider/>
+
+		<v-list>
+			<v-list-item>
+				<v-list-item-title>{{ $page.props.auth.user.name }}</v-list-item-title>
+				<v-list-subtitle>{{ $page.props.auth.user.email }}</v-list-subtitle>
+			</v-list-item>
+
+			<v-list-item :to="route('profile.edit')" link>
+				<v-list-item-title>Profile</v-list-item-title>
+			</v-list-item>
+
+			<v-list-item
+				:href="route('logout')"
+				method="post"
+				as="button"
+			>
+				<v-list-item-title>Log Out</v-list-item-title>
+			</v-list-item>
+		</v-list>
+	</v-navigation-drawer>
 </template>
 
 <script setup>
-import ApplicationLogo from "@/Components/Generic/ApplicationLogo.vue";
-import NavLink from "@/Components/Generic/Nav/NavLink.vue";
-import ResponsiveNavLink from "@/Components/Generic/Nav/ResponsiveNavLink.vue";
-import DropdownLink from "@/Components/Generic/Nav/DropdownLink.vue";
-import Dropdown from "@/Components/Generic/Nav/Dropdown.vue";
-import {Link} from "@inertiajs/vue3";
-import {ref} from "vue";
+import ApplicationLogo from '@/Components/Generic/ApplicationLogo.vue'
+import {Link} from '@inertiajs/vue3'
+import {ref} from 'vue'
 
-const showingNavigationDropdown = ref(false);
+const drawer = ref(false)
 </script>

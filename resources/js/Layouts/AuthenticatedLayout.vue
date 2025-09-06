@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <v-app>
         <div class="min-h-screen bg-gray-100">
 			<NavBar />
 
             <!-- Page Content -->
-            <main class="py-12">
+            <main class="py-12 mt-6">
                 <slot/>
 
 				<v-snackbar v-model="showSnackbar" :color="snackbarColor" timeout="3000" absolute top right>
@@ -12,7 +12,7 @@
 				</v-snackbar>
             </main>
         </div>
-    </div>
+    </v-app>
 </template>
 
 <script setup>
