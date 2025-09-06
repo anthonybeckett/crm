@@ -1,40 +1,5 @@
-<script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
-
-const passwordInput = ref(null);
-const currentPasswordInput = ref(null);
-
-const form = useForm({
-    current_password: '',
-    password: '',
-    password_confirmation: '',
-});
-
-const updatePassword = () => {
-    form.put(route('password.update'), {
-        preserveScroll: true,
-        onSuccess: () => form.reset(),
-        onError: () => {
-            if (form.errors.password) {
-                form.reset('password', 'password_confirmation');
-                passwordInput.value.focus();
-            }
-            if (form.errors.current_password) {
-                form.reset('current_password');
-                currentPasswordInput.value.focus();
-            }
-        },
-    });
-};
-</script>
-
 <template>
-    <section>
+    <section class="mt-4">
         <header>
             <h2 class="text-lg font-medium text-gray-900">
                 Update Password
@@ -46,77 +11,50 @@ const updatePassword = () => {
             </p>
         </header>
 
-        <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
-            <div>
-                <InputLabel for="current_password" value="Current Password" />
+		<v-form class="mt-4">
+			<div>
+				<p v-if="form.errors.current_password" class="text-red-500">{{ form.errors.current_password }}</p>
+				<v-text-field v-model="form.current_password" label="Password" variant="outlined" type="password"></v-text-field>
+			</div>
 
-                <TextInput
-                    id="current_password"
-                    ref="currentPasswordInput"
-                    v-model="form.current_password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="current-password"
-                />
+			<div>
+				<p v-if="form.errors.password" class="text-red-500">{{ form.errors.password }}</p>
+				<v-text-field v-model="form.password" label="Password" variant="outlined" type="password"></v-text-field>
+			</div>
 
-                <InputError
-                    :message="form.errors.current_password"
-                    class="mt-2"
-                />
-            </div>
+			<div>
+				<p v-if="form.errors.password_confirmation" class="text-red-500">{{ form.errors.password_confirmation }}</p>
+				<v-text-field v-model="form.password_confirmation" label="Confirm Password" variant="outlined" type="password"></v-text-field>
+			</div>
 
-            <div>
-                <InputLabel for="password" value="New Password" />
-
-                <TextInput
-                    id="password"
-                    ref="passwordInput"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="new-password"
-                />
-
-                <InputError :message="form.errors.password" class="mt-2" />
-            </div>
-
-            <div>
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
-
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    autocomplete="new-password"
-                />
-
-                <InputError
-                    :message="form.errors.password_confirmation"
-                    class="mt-2"
-                />
-            </div>
-
-            <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p
-                        v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600"
-                    >
-                        Saved.
-                    </p>
-                </Transition>
-            </div>
-        </form>
+			<v-btn variant="outlined" :disabled="form.processing" @click="updatePassword">Save</v-btn>
+		</v-form>
     </section>
 </template>
+
+<script setup>
+import {useForm} from '@inertiajs/vue3';
+import {route} from "ziggy-js";
+import {useToast} from "@/Composibles/Generic/useToast.js";
+
+const toast = useToast();
+
+const form = useForm({
+	current_password: '',
+	password: '',
+	password_confirmation: '',
+});
+
+const updatePassword = () => {
+	form.put(route('password.update'), {
+		preserveScroll: true,
+		onSuccess: () => {
+			form.reset();
+			toast.success('Password updated successfully!');
+		},
+		onError: () => {
+			toast.error('Password updated failed!');
+		},
+	});
+};
+</script>
