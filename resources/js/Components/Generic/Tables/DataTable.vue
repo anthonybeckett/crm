@@ -54,7 +54,6 @@ const options = ref({
 })
 
 watch(options, (newOptions) => {
-	console.log(props)
 	router.get(
 		route(props.routeName),
 		{
