@@ -12,6 +12,11 @@
 				<v-icon class="mr-2">mdi-home</v-icon>
 				Home
 			</Link>
+
+			<Link :href="route('leads')" class="flex items-center px-4">
+				<v-icon class="mr-2">mdi-card-account-details-star-outline</v-icon>
+				Leads
+			</Link>
 		</v-toolbar-items>
 
 		<v-spacer/>

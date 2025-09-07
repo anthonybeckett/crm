@@ -1,6 +1,6 @@
 <template>
-	<MainLayout title="Home">
-		Welcome to the CRM!
+	<MainLayout title="Leads">
+		Leads Page. need to template this layout more
 	</MainLayout>
 </template>
 
