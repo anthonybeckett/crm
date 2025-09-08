@@ -8,7 +8,7 @@
 			route-name="leads"
 		>
 			<template #row="{ item }">
-				<tr class="hoverable-row">
+				<tr class="hoverable-row" @click="goToRecord(item)">
 					<td>{{ item.name }}</td>
 					<td>{{ item.email }}</td>
 					<td>{{ item.phone_number }}</td>
@@ -29,7 +29,7 @@ const props = defineProps({
 	filters: Object,
 })
 
-const { headers } = useLeadsTable(props)
+const { headers, goToRecord } = useLeadsTable(props)
 </script>
 
 <style scoped>

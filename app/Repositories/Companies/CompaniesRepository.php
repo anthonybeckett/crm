@@ -34,4 +34,11 @@ class CompaniesRepository
 
 		return $query->paginate($perPage)->appends($request->all());
 	}
+
+	public function getLeadById(int $id): ?Company
+	{
+		return Company::query()
+			->where('id', $id)
+			->first();
+	}
 }

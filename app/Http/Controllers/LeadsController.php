@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Services\Leads\LeadsService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,6 +23,19 @@ class LeadsController extends Controller
 		return Inertia::render('Leads/Leads', [
 			'leads' => $leads,
 			'filters' => $request->only(['search', 'sortBy', 'sortOrder']),
+		]);
+	}
+
+	public function show(int $id): Response
+	{
+		$lead = $this->leadsService->getLeadById($id);
+
+		if ($lead === null) {
+			abort(404);
+		}
+
+		return Inertia::render('Leads/Lead', [
+			'lead' => $lead,
 		]);
 	}
 }

@@ -1,30 +1,3 @@
-<script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue'
-import {Head, Link, useForm} from '@inertiajs/vue3'
-import {route} from "ziggy-js";
-
-defineProps({
-	canResetPassword: {
-		type: Boolean,
-	},
-	status: {
-		type: String,
-	},
-})
-
-const form = useForm({
-	email: '',
-	password: '',
-	remember: false,
-})
-
-const submit = () => {
-	form.post(route('login'), {
-		onFinish: () => form.reset('password'),
-	})
-}
-</script>
-
 <template>
 	<GuestLayout>
 		<Head title="Log in"/>
@@ -90,3 +63,30 @@ const submit = () => {
 		</v-container>
 	</GuestLayout>
 </template>
+
+<script setup>
+import GuestLayout from '@/Layouts/GuestLayout.vue'
+import {Head, Link, useForm} from '@inertiajs/vue3'
+import {route} from "ziggy-js";
+
+defineProps({
+	canResetPassword: {
+		type: Boolean,
+	},
+	status: {
+		type: String,
+	},
+})
+
+const form = useForm({
+	email: '',
+	password: '',
+	remember: false,
+})
+
+const submit = () => {
+	form.post(route('login'), {
+		onFinish: () => form.reset('password'),
+	})
+}
+</script>

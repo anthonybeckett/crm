@@ -10,6 +10,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 	Route::get('/leads', [LeadsController::class, 'index'])->name('leads');
 
+	Route::get('/lead/{id}', [LeadsController::class, 'show'])->name('lead.show');
+
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
