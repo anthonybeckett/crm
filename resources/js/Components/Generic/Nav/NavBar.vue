@@ -1,6 +1,6 @@
 <template>
 	<!-- Top App Bar -->
-	<v-app-bar color="white" elevation="1">
+	<v-app-bar elevation="1">
 		<!-- Logo -->
 		<Link :href="route('home')" class="flex items-center">
 			<ApplicationLogo class="h-9 w-auto mr-4"/>

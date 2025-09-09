@@ -1,6 +1,6 @@
 <template>
-    <v-app>
-        <div class="min-h-screen bg-gray-100">
+    <v-app class="bg-background text-body">
+        <div class="min-h-screen">
 			<NavBar />
 
             <!-- Page Content -->
