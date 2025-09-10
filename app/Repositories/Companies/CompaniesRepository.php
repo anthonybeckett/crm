@@ -2,12 +2,13 @@
 
 namespace App\Repositories\Companies;
 
+use App\Contracts\Repositories\CompaniesRepositoryInterface;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class CompaniesRepository
+class CompaniesRepository implements CompaniesRepositoryInterface
 {
 	public function fetchAllLeads(Request $request): LengthAwarePaginator|AbstractPaginator
 	{

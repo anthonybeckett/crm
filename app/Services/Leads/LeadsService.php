@@ -2,15 +2,15 @@
 
 namespace App\Services\Leads;
 
+use App\Contracts\Repositories\CompaniesRepositoryInterface;
 use App\Models\Company;
-use App\Repositories\Companies\CompaniesRepository;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 readonly class LeadsService
 {
 	public function __construct(
-		private CompaniesRepository $companiesRepository
+		private CompaniesRepositoryInterface $companiesRepository
 	)
 	{
 	}
