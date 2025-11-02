@@ -50,7 +50,7 @@
 
 							<v-btn
 								type="submit"
-								color="primary"
+								color="success"
 								:loading="form.processing"
 								:disabled="form.processing"
 							>

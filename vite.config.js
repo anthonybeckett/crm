@@ -3,6 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import vuetify from "vite-plugin-vuetify";
 import tailwindcss from '@tailwindcss/vite'
+import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
     plugins: [
@@ -20,5 +21,6 @@ export default defineConfig({
         }),
         vuetify({ autoImport: true }),
         tailwindcss(),
+        vueDevTools({ appendTo: 'resources/js/app.js' }),
     ],
 });
