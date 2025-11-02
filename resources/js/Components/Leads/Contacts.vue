@@ -1,10 +1,50 @@
 <template>
     <section class="mt-2">
-        <h3 class="text-h6 font-weight-medium mt-2 mb-6">Contacts</h3>
-        <p>This is the Contacts component for Leads.</p>
+        <v-table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Telephone</th>
+                    <th>Primary Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    v-for="contact in state.contacts"
+                    :key="contact.id"
+                >
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.telephone }}</td>
+                    <td>{{ contact.primary ? 'Yes' : 'No' }}</td>
+                </tr>
+            </tbody>
+        </v-table>
     </section>
 </template>
 
 <script setup>
+import { reactive } from 'vue'
 
+const state = reactive({
+    contacts: [
+        {
+            id: 1,
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            telephone: '07123456789',
+            primary: true
+        },
+        {
+            id: 2,
+            name: 'Jane Smith',
+            email: 'jane.smith@example.com',
+            telephone: '01258456789',
+            primary: false
+        }
+    ],
+})
 </script>
