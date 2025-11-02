@@ -1,28 +1,10 @@
 <template>
-    <section class="mt-2">
-        <v-table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Telephone</th>
-                    <th>Primary Contact</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="contact in state.contacts"
-                    :key="contact.id"
-                >
-                    <td>{{ contact.id }}</td>
-                    <td>{{ contact.name }}</td>
-                    <td>{{ contact.email }}</td>
-                    <td>{{ contact.telephone }}</td>
-                    <td>{{ contact.primary ? 'Yes' : 'No' }}</td>
-                </tr>
-            </tbody>
-        </v-table>
+    <section class="mt-4">
+        <v-data-table
+            :items="state.contacts"
+            :loading="state.loading"
+            class="elevation-1"
+        ></v-data-table>
     </section>
 </template>
 
@@ -46,5 +28,6 @@ const state = reactive({
             primary: false
         }
     ],
+    loading : false,
 })
 </script>
